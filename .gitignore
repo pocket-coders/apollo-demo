@@ -1,0 +1,7 @@
+node_modules
+dist
+**/*.log
+.vscode
+.env
+config/webpack/tmp
+**/latest.dump
