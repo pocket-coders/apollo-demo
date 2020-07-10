@@ -8,15 +8,6 @@ import { ApolloProvider } from "react-apollo";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
-const GET_ALL_FILMS = gql`
-  query GetAllFilms {
-    allFilms {
-      id
-      title
-    }
-  }
-`;
-
 const cache = new InMemoryCache();
 
 const link = new HttpLink({
@@ -28,7 +19,19 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   link,
 });
 
+// Mistake #1: I should not have to know another language to write a query
+const GET_ALL_FILMS = gql`
+  query GetAllFilms {
+    allFilms {
+      id
+      title
+    }
+  }
+`;
+
+// Mistake #2: I should not have to repeat the description of a type
 type Film = {
+  // Mistake #3: The type is wrong here, and that should be caught at compile-time
   title: string;
   director: string;
 };
